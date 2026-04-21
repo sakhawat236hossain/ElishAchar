@@ -16,6 +16,7 @@ import SafetySection from '@/components/SafetySection';
 import Products from '@/components/Products';
 import Checkout from '@/components/Checkout';
 import Footer from '@/components/Footer';
+import ContactWidget from '../components/ContactWidget';
 
 export default function Home() {
   const [showCheckout, setShowCheckout] = useState(false);
@@ -24,13 +25,7 @@ export default function Home() {
     <main className="w-full">
       {/* Admin Link - Hidden in corner */}
       <div className="fixed bottom-4 right-4 z-40">
-        <Link
-          href="/admin"
-          className="bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-lg transition-all duration-200 transform hover:scale-110"
-          title="Admin Dashboard"
-        >
-          ⚙️ অ্যাডমিন
-        </Link>
+        <ContactWidget></ContactWidget>
       </div>
 
       {/* Checkout Modal */}
