@@ -37,15 +37,14 @@ export default function WhyChooseUs() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 items-center">
           
-          {/* Left Image Section - আগের ডিজাইনগুলোর মতো ফিক্সড Layout */}
-          {/* order-2 md:order-1 নিশ্চিত করে যে মোবাইলে ইমেজ নিচে যাবে এবং ডেসক্রিপশন উপরে থাকবে */}
+          
           <div className="flex justify-center items-center order-2 md:order-1">
             <div className="relative w-full max-w-sm aspect-[4/5] bg-white rounded-3xl overflow-hidden shadow-2xl shadow-green-100 border-4 border-white grouptransition-all duration-500 hover:shadow-green-200/50">
               <Image
                 src="/mas.jpg"
                 alt="Elish Achhar"
-                fill // ইমেজ অটো ফিট হবে কন্টেইনারে
-                priority // যেহেতু এটি এলসিপি হতে পারে, প্রিওরিটি দেওয়া হয়েছে
+                fill 
+                priority 
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
               {/* Overlay with Text */}

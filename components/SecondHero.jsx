@@ -1,48 +1,63 @@
+import Image from "next/image";
+
 export default function SecondHero({ onOrderClick }) {
   return (
-    <section className="w-full py-12 md:py-20 px-4 md:px-8 bg-gradient-to-r from-gray-900 to-gray-800">
+    <section className="w-full py-16 md:py-24 px-4 md:px-8 bg-gray-900 overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
           {/* Left Content */}
-          <div className="text-white space-y-6">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">✅</span>
-              <h2 className="text-xl md:text-2xl font-bold">শতভাগ হালাল</h2>
+          <div className="text-white space-y-8">
+            {/* Halal Badge */}
+            <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
+              <span className="text-xl">✅</span>
+              <span className="font-medium">শতভাগ হালাল ও বিশুদ্ধ</span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-bold leading-tight">
-              গরুর মাংসের ঝুরা আচার
-            </h1>
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+                গরুর মাংসের <br className="hidden md:block" />
+                <span className="text-green-500">ঝুরা আচার</span>
+              </h1>
+              <p className="text-gray-300 text-lg leading-relaxed max-w-md">
+                দেশি মসলায় নিখুঁতভাবে তৈরি। প্রতিটি কামড়ে পাবেন খাঁটি গরুর মাংসের স্বাদ এবং আচারের অনন্য ঘ্রাণ। আপনার খাবারের টেবিলকে করুন আরও উৎসবমুখর।
+              </p>
+            </div>
 
-            <p className="text-gray-200 leading-relaxed text-base md:text-lg">
-              আরেকটি দুর্দান্ত পণ্য - গরুর মাংসের ঝুরা আচার। শতভাগ হালাল এবং দেশি উপাদান দিয়ে তৈরি এই আচার আপনার খাবারকে আরও সুস্বাদু করে তুলবে।
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="bg-gray-700 p-4 rounded-lg shadow">
-                <p className="text-sm text-gray-300">পরিমাণ</p>
-                <p className="text-2xl font-bold text-white">৫০০ গ্রাম</p>
+            {/* Price & Quantity Grid */}
+            <div className="flex gap-4">
+              <div className="bg-white/5 border border-white/10 p-5 rounded-2xl min-w-[120px]">
+                <p className="text-gray-400 text-sm mb-1">পরিমাণ</p>
+                <p className="text-xl font-bold">৫০০ গ্রাম</p>
               </div>
-              <div className="bg-gray-700 p-4 rounded-lg shadow">
-                <p className="text-sm text-gray-300">মূল্য</p>
-                <p className="text-2xl font-bold text-white">৳৮০০</p>
+              <div className="bg-green-600/20 border border-green-600/50 p-5 rounded-2xl min-w-[120px]">
+                <p className="text-green-400 text-sm mb-1">মূল্য</p>
+                <p className="text-xl font-bold">৳৮০০</p>
               </div>
             </div>
 
             <button
               onClick={onOrderClick}
-              className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+              className="px-10 py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-2xl shadow-lg shadow-green-900/50 transition-all duration-300 transform hover:scale-105 active:scale-95 text-lg"
             >
               অর্ডার করুন এখনই
             </button>
           </div>
 
           {/* Right Image */}
-          <div className="flex justify-center">
-            <div className="w-full max-w-sm h-80 bg-gradient-to-br from-red-100 to-orange-100 rounded-xl shadow-lg flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-6xl mb-4">🥘</div>
-                <p className="text-gray-700 font-semibold">গরুর মাংসের ঝুরা আচার</p>
+          <div className="relative w-full aspect-[4/5] md:aspect-square lg:max-w-md mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-tr from-green-500 to-transparent rounded-3xl opacity-20 blur-2xl"></div>
+            <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white/10">
+              <Image 
+                src="/goru.jpg" 
+                alt="Gorur Mangsher Jhura Achhar" 
+                fill 
+                className="object-cover transition-transform duration-700 hover:scale-110" 
+              />
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div className="absolute bottom-6 left-6">
+                <p className="text-white font-bold text-xl">প্রিমিয়াম ঝুরা আচার</p>
               </div>
             </div>
           </div>
