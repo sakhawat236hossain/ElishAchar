@@ -42,12 +42,12 @@ export default function Home() {
 
       <Hero onOrderClick={() => setShowCheckout(true)} />
       <ProductDetails onOrderClick={() => setShowCheckout(true)} />
-      <VideoSection />
+      <VideoSection  />
       <ReviewCarousel />
       <HowToEat />
-      <Packaging />
+      <Packaging  onOrderClick={() => setShowCheckout(true)}/>
       <WhyChooseUs />
-      <OrderSection />
+      <OrderSection onOrderClick={() => setShowCheckout(true)}/>
       <SecondHero onOrderClick={() => setShowCheckout(true)} />
       <BestSelling onOrderClick={() => setShowCheckout(true)} />
       <SafetySection />

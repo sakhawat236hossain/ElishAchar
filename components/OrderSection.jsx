@@ -1,4 +1,4 @@
-export default function OrderSection() {
+export default function OrderSection({ onOrderClick }) {
   return (
     <section className="w-full py-12 md:py-16 px-4 md:px-8 bg-gradient-to-r from-green-50 to-emerald-50">
       <div className="max-w-4xl mx-auto">
@@ -13,7 +13,7 @@ export default function OrderSection() {
               <p className="text-gray-900 font-bold mb-4 text-lg">
                 👉 অর্ডার করতে নিচে ক্লিক করুন
               </p>
-              <button className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 text-lg">
+              <button onClick={onOrderClick} className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 text-lg">
                 অর্ডার করুন
               </button>
             </div>
@@ -48,7 +48,7 @@ export default function OrderSection() {
           </div>
 
           <div className="text-center mt-8">
-            <button className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 text-lg">
+            <button onClick={onOrderClick} className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 text-lg">
               এখনই অর্ডার করুন
             </button>
           </div>

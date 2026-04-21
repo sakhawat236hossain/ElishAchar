@@ -40,7 +40,8 @@ export default function ProductDetails({ onOrderClick }) {
               </div>
             </div>
 
-           {/* Right Image/Package Section */}
+            {/* Right Image */}
+          {/* Right Image/Package Section */}
 <div className="flex justify-center items-center p-4">
   <div className="group relative w-full max-w-xs h-80 bg-white border-2 border-green-50 rounded-3xl shadow-xl flex flex-col items-center justify-center transition-all duration-500 hover:-translate-y-2 hover:shadow-green-200/50">
     
@@ -57,7 +58,7 @@ export default function ProductDetails({ onOrderClick }) {
         alt="Product Image" 
         width={220} 
         height={220} 
-        className="relative z-10 drop-shadow-2xl" 
+        className="relative z-10 drop-shadow-2xl h-auto" 
       />
     </div>
 
