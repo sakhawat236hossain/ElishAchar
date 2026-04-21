@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function WhyChooseUs() {
   const reasons = [
     {
@@ -23,38 +25,52 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="w-full py-12 md:py-16 px-4 md:px-8 bg-gray-50">
+    <section className="w-full py-16 px-4 md:px-8 bg-gray-50">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-4">
-          কেন খাবেন আমাদের ইলিশ মাছের আচার?
-        </h2>
-        <p className="text-center text-gray-600 mb-12">আমাদের অনন্য বৈশিষ্ট্য এবং গুণমান জানুন</p>
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            কেন খাবেন আমাদের ইলিশ মাছের আচার?
+          </h2>
+          <p className="text-gray-600">আমাদের অনন্য বৈশিষ্ট্য এবং গুণমান জানুন</p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {/* Left Image */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 items-center">
+          
+          {/* Left Image Section - আগের ডিজাইনগুলোর মতো ফিক্সড Layout */}
+          {/* order-2 md:order-1 নিশ্চিত করে যে মোবাইলে ইমেজ নিচে যাবে এবং ডেসক্রিপশন উপরে থাকবে */}
           <div className="flex justify-center items-center order-2 md:order-1">
-            <div className="w-full max-w-sm h-80 bg-gradient-to-br from-green-100 to-emerald-200 rounded-xl shadow-lg flex items-center justify-center">
-              <div className="text-center">
-                <div className="text-7xl mb-4">🐟</div>
-                <p className="text-gray-700 font-semibold text-lg">প্রিমিয়াম মানের আচার</p>
+            <div className="relative w-full max-w-sm aspect-[4/5] bg-white rounded-3xl overflow-hidden shadow-2xl shadow-green-100 border-4 border-white grouptransition-all duration-500 hover:shadow-green-200/50">
+              <Image
+                src="/mas.jpg"
+                alt="Elish Achhar"
+                fill // ইমেজ অটো ফিট হবে কন্টেইনারে
+                priority // যেহেতু এটি এলসিপি হতে পারে, প্রিওরিটি দেওয়া হয়েছে
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              {/* Overlay with Text */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+                <p className="text-white font-bold text-xl">প্রিমিয়াম মানের আচার</p>
               </div>
             </div>
           </div>
 
-          {/* Right Grid */}
-          <div className="grid grid-cols-1 gap-4 order-1 md:order-2">
+          {/* Right Grid - আপনার আগের টেক্সট কার্ডগুলো */}
+          <div className="grid grid-cols-1 gap-5 order-1 md:order-2">
             {reasons.map((reason, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 border-l-4 border-green-500"
+                className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-lg transition-all duration-300 border-l-4 border-green-500 hover:-translate-y-1"
               >
                 <div className="flex gap-4">
                   <div className="text-3xl flex-shrink-0">{reason.emoji}</div>
                   <div>
-                    <h3 className="font-bold text-gray-900 mb-2 text-sm md:text-base">
+                    <h3 className="font-bold text-gray-900 mb-2 tracking-tight text-base md:text-lg">
                       {reason.title}
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{reason.description}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {reason.description}
+                    </p>
                   </div>
                 </div>
               </div>
