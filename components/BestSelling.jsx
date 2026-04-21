@@ -1,74 +1,76 @@
+import Image from "next/image";
+
 export default function BestSelling({ onOrderClick }) {
   const products = [
     {
       id: 1,
       name: 'ইলিশ মাছের আচার',
-      emoji: '🐟',
+      image: '/elish.png',
       price: '৳১০০০',
       quantity: '৫০০ গ্রাম',
     },
     {
       id: 2,
       name: 'গরুর মাংসের ঝুরা',
-      emoji: '🥘',
+      image: '/goru.jpg', 
       price: '৳৮০০',
       quantity: '৫০০ গ্রাম',
     },
     {
       id: 3,
       name: 'মিশ্র সবজির আচার',
-      emoji: '🥒',
+      image: '/mix.jpg', 
       price: '৳৬০০',
       quantity: '৫০০ গ্রাম',
     },
   ];
 
   return (
-    <section className="w-full py-12 md:py-16 px-4 md:px-8 bg-white">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-12">
-          আমাদের বেস্ট সেলিং পণ্যসমূহ
-        </h2>
+    <section className="w-full py-12 px-4 md:px-8 bg-gray-50">
+      <div className="max-w-5xl mx-auto"> {/* max-w কমিয়ে দেওয়া হয়েছে */}
+        {/* Header */}
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+            আমাদের বেস্ট সেলিং পণ্যসমূহ
+          </h2>
+          <p className="text-gray-600 text-sm">সেরা স্বাদের নিশ্চয়তা</p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6"> {/* গ্যাপ কমিয়ে ৬ করা হয়েছে */}
           {products.map((product) => (
             <div
               key={product.id}
-              className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
+              className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden group transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
-              {/* Image */}
-              <div className="w-full h-48 bg-white rounded-lg flex items-center justify-center mb-4 shadow-sm">
-                <div className="text-6xl">{product.emoji}</div>
+              {/* Image Section */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
               </div>
 
               {/* Product Info */}
-              <h3 className="text-lg font-bold text-gray-900 mb-2 text-center">{product.name}</h3>
-              <p className="text-gray-600 text-sm text-center mb-4">{product.quantity}</p>
+              <div className="p-4"> {/* প্যাডিং কমানো হয়েছে */}
+                <h3 className="text-lg font-bold text-gray-900 mb-1">{product.name}</h3>
+                <p className="text-gray-500 text-sm mb-4">{product.quantity}</p>
 
-              {/* Price */}
-              <div className="text-center mb-6">
-                <p className="text-2xl font-bold text-green-600">{product.price}</p>
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-xl font-bold text-green-600">{product.price}</p>
+                </div>
+
+                <button
+                  onClick={onOrderClick}
+                  className="w-full py-2 cursor-pointer bg-gray-900 hover:bg-green-600 text-white font-bold rounded-lg transition-all duration-300 active:scale-95"
+                >
+                  অর্ডার করুন
+                </button>
               </div>
-
-              {/* Order Button */}
-              <button
-                onClick={onOrderClick}
-                className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105"
-              >
-                অর্ডার করুন
-              </button>
             </div>
           ))}
-        </div>
-
-        {/* CTA Button */}
-        <div className="text-center">
-          <button
-            onClick={onOrderClick}
-            className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 text-lg"
-          >
-            এখনই অর্ডার করুন
-          </button>
         </div>
       </div>
     </section>
