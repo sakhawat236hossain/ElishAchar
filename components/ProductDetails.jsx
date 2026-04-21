@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function ProductDetails({ onOrderClick }) {
   return (
     <section className="w-full py-12 md:py-16 px-4 md:px-8 bg-white">
@@ -38,15 +40,34 @@ export default function ProductDetails({ onOrderClick }) {
               </div>
             </div>
 
-            {/* Right Image */}
-            <div className="flex justify-center items-center">
-              <div className="w-full max-w-xs h-80 bg-gradient-to-br from-green-100 to-emerald-200 rounded-xl shadow-lg flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-7xl mb-4">🐟</div>
-                  <p className="text-gray-700 font-semibold text-lg">প্রিমিয়াম প্যাকেজ</p>
-                </div>
-              </div>
-            </div>
+           {/* Right Image/Package Section */}
+<div className="flex justify-center items-center p-4">
+  <div className="group relative w-full max-w-xs h-80 bg-white border-2 border-green-50 rounded-3xl shadow-xl flex flex-col items-center justify-center transition-all duration-500 hover:-translate-y-2 hover:shadow-green-200/50">
+    
+    {/* Premium Badge */}
+    <div className="absolute top-4 left-4 bg-yellow-400 text-yellow-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+      Premium
+    </div>
+
+    {/* Image container */}
+    <div className="relative mb-6 transform transition-transform duration-500 group-hover:scale-110">
+      <div className="absolute inset-0 bg-green-200 blur-2xl opacity-20 rounded-full"></div>
+      <Image 
+        src="/hero2.png" 
+        alt="Product Image" 
+        width={220} 
+        height={220} 
+        className="relative z-10 drop-shadow-2xl" 
+      />
+    </div>
+
+    {/* Text */}
+    <div className="text-center">
+      <p className="text-gray-800 font-bold text-xl mb-1">প্রিমিয়াম প্যাকেজ</p>
+      <p className="text-green-600 font-medium text-sm">সেরা কোয়ালিটির নিশ্চয়তা</p>
+    </div>
+  </div>
+</div>
           </div>
 
           <div className="text-center mt-8">
