@@ -1,21 +1,25 @@
 import { NextResponse } from "next/server";
 import { collections, dbConnect } from "../../../../lib/dbConnect";
 
-export const POST = async (request) => {
+export async function POST(req) {
   try {
-    const body = await request.json();
-    const productCollection = await dbConnect(collections.PRODUCTS);
 
-    const result = await productCollection.insertOne(body);
+    const { name, price, image, weight } = await req.json(); 
+    
+    const collection = await dbConnect(collections.PRODUCTS);
 
-    return NextResponse.json(
-      { message: "Product added", id: result.insertedId },
-      { status: 201 },
-    );
+    const result = await collection.insertOne({
+      name,
+      price,
+      weight, 
+      image,
+      createdAt: new Date(),
+    });
+
+    return NextResponse.json({ success: true, id: result.insertedId }, { status: 201 });
   } catch (error) {
-    return NextResponse.json(
-      { message: "Failed to add product" },
-      { status: 500 },
-    );
+  
+    console.error("Database Error:", error); 
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
-};
+}
