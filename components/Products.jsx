@@ -66,8 +66,16 @@ export default function Products({ onOrderClick }) {
 
       pdfMake.vfs =
         pdfFonts.vfs || (pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : {});
+
       const orderId = `ALB-${Date.now().toString().slice(-8)}`;
       const orderDate = new Date();
+
+      pdfMake.fonts = {
+        Bangla: {
+          normal: "https://fonts.gstatic.com/s/kalpurush/v15/Kalpurush.ttf",
+          bold: "https://fonts.gstatic.com/s/kalpurush/v15/Kalpurush.ttf",
+        },
+      };
 
       const docDefinition = {
         content: [
