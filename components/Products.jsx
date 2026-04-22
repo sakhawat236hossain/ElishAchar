@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 const products = [
   {
     id: 1,
-    name: 'ইলিশ মাছের আচার',
-    emoji: '🐟',
+    name: "ইলিশ মাছের আচার",
+    emoji: "🐟",
     price: 1000,
-    quantity: '৫০০ গ্রাম',
-    description: 'খাঁটি ইলিশ মাছের সাথে মশলা ভেজানো স্বাদে ভরপুর আচার',
+    quantity: "৫০০ গ্রাম",
+    description: "খাঁটি ইলিশ মাছের সাথে মশলা ভেজানো স্বাদে ভরপুর আচার",
   },
   {
     id: 2,
-    name: 'গরুর মাংসের ঝুরা',
-    emoji: '🥘',
+    name: "গরুর মাংসের ঝুরা",
+    emoji: "🥘",
     price: 800,
-    quantity: '৫০০ গ্রাম',
-    description: 'কোমল গরুর মাংস এবং ঐতিহ্যবাহী মশলার সমন্বয়',
+    quantity: "৫০০ গ্রাম",
+    description: "কোমল গরুর মাংস এবং ঐতিহ্যবাহী মশলার সমন্বয়",
   },
   {
     id: 3,
-    name: 'মিশ্র সবজির আচার',
-    emoji: '🥒',
+    name: "মিশ্র সবজির আচার",
+    emoji: "🥒",
     price: 600,
-    quantity: '৫০০ গ্রাম',
-    description: 'তাজা সবজি এবং মৃদু মশলার স্বাস্থ্যকর মিশ্রণ',
+    quantity: "৫০০ গ্রাম",
+    description: "তাজা সবজি এবং মৃদু মশলার স্বাস্থ্যকর মিশ্রণ",
   },
 ];
 
@@ -34,9 +34,9 @@ const SHIPPING = 50;
 export default function Products({ onOrderClick }) {
   const [selectedProducts, setSelectedProducts] = useState({});
   const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    address: '',
+    name: "",
+    phone: "",
+    address: "",
   });
   const [orderPlaced, setOrderPlaced] = useState(false);
 
@@ -61,61 +61,67 @@ export default function Products({ onOrderClick }) {
 
   const generateInvoiceFile = async () => {
     try {
-      const pdfMake = await import('pdfmake/build/pdfmake');
-      const pdfFonts = await import('pdfmake/build/vfs_fonts');
-      
-      pdfMake.default.vfs = pdfFonts.pdfMake.vfs;
+      const pdfMake = (await import("pdfmake/build/pdfmake")).default;
+      const pdfFonts = (await import("pdfmake/build/vfs_fonts")).default;
 
+      pdfMake.vfs =
+        pdfFonts.vfs || (pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : {});
       const orderId = `ALB-${Date.now().toString().slice(-8)}`;
       const orderDate = new Date();
 
       const docDefinition = {
         content: [
           {
-            text: 'আলেশা বাজার',
+            text: "আলেশা বাজার",
             fontSize: 24,
             bold: true,
-            color: '#16a34a',
-            alignment: 'center',
+            color: "#16a34a",
+            alignment: "center",
             margin: [0, 0, 0, 10],
           },
           {
-            text: 'শতভাগ হালাল হোমমেড আচার সরবরাহকারী',
+            text: "শতভাগ হালাল হোমমেড আচার সরবরাহকারী",
             fontSize: 11,
-            color: '#666666',
-            alignment: 'center',
+            color: "#666666",
+            alignment: "center",
             margin: [0, 0, 0, 15],
           },
           {
             text: `অর্ডার আইডি: ${orderId}`,
             fontSize: 12,
             bold: true,
-            color: '#16a34a',
-            alignment: 'center',
-            fillColor: '#dcfce7',
+            color: "#16a34a",
+            alignment: "center",
+            fillColor: "#dcfce7",
             margin: [0, 0, 0, 20],
             padding: [8, 8, 8, 8],
           },
           {
-            text: 'অর্ডার বিবরণ',
+            text: "অর্ডার বিবরণ",
             fontSize: 13,
             bold: true,
             margin: [0, 0, 0, 10],
-            color: '#1f2937',
+            color: "#1f2937",
           },
           {
             columns: [
-              { text: `তারিখ: ${orderDate.toLocaleDateString('bn-BD')}`, fontSize: 10 },
-              { text: `সময়: ${orderDate.toLocaleTimeString('bn-BD')}`, fontSize: 10 },
+              {
+                text: `তারিখ: ${orderDate.toLocaleDateString("bn-BD")}`,
+                fontSize: 10,
+              },
+              {
+                text: `সময়: ${orderDate.toLocaleTimeString("bn-BD")}`,
+                fontSize: 10,
+              },
             ],
             margin: [0, 0, 0, 15],
           },
           {
-            text: 'গ্রাহক তথ্য',
+            text: "গ্রাহক তথ্য",
             fontSize: 13,
             bold: true,
             margin: [0, 0, 0, 10],
-            color: '#1f2937',
+            color: "#1f2937",
           },
           {
             stack: [
@@ -127,51 +133,51 @@ export default function Products({ onOrderClick }) {
             margin: [0, 0, 0, 15],
           },
           {
-            text: 'অর্ডারকৃত পণ্য',
+            text: "অর্ডারকৃত পণ্য",
             fontSize: 13,
             bold: true,
             margin: [0, 0, 0, 10],
-            color: '#1f2937',
+            color: "#1f2937",
           },
           {
             table: {
               headerRows: 1,
-              widths: ['*', 80],
+              widths: ["*", 80],
               body: [
                 [
-                  { text: 'পণ্য', bold: true, fontSize: 10 },
-                  { text: 'দাম', bold: true, fontSize: 10, alignment: 'right' },
+                  { text: "পণ্য", bold: true, fontSize: 10 },
+                  { text: "দাম", bold: true, fontSize: 10, alignment: "right" },
                 ],
                 ...selectedProductsList.map((p) => [
                   `${p.emoji} ${p.name}`,
-                  { text: `৳${p.price}`, alignment: 'right' },
+                  { text: `৳${p.price}`, alignment: "right" },
                 ]),
               ],
             },
             margin: [0, 0, 0, 20],
           },
           {
-            fillColor: '#f0fdf4',
+            fillColor: "#f0fdf4",
             padding: [12, 12, 12, 12],
             table: {
-              widths: ['*', 100],
+              widths: ["*", 100],
               body: [
                 [
-                  { text: 'সাবটোটাল:', fontSize: 10 },
-                  { text: `৳${subtotal}`, alignment: 'right', fontSize: 10 },
+                  { text: "সাবটোটাল:", fontSize: 10 },
+                  { text: `৳${subtotal}`, alignment: "right", fontSize: 10 },
                 ],
                 [
-                  { text: 'ডেলিভারি চার্জ:', fontSize: 10 },
-                  { text: `৳${SHIPPING}`, alignment: 'right', fontSize: 10 },
+                  { text: "ডেলিভারি চার্জ:", fontSize: 10 },
+                  { text: `৳${SHIPPING}`, alignment: "right", fontSize: 10 },
                 ],
                 [
-                  { text: 'মোট:', fontSize: 12, bold: true, color: '#16a34a' },
+                  { text: "মোট:", fontSize: 12, bold: true, color: "#16a34a" },
                   {
                     text: `৳${total}`,
-                    alignment: 'right',
+                    alignment: "right",
                     fontSize: 12,
                     bold: true,
-                    color: '#16a34a',
+                    color: "#16a34a",
                   },
                 ],
               ],
@@ -179,10 +185,16 @@ export default function Products({ onOrderClick }) {
             margin: [0, 0, 0, 20],
           },
           {
-            fillColor: '#dbeafe',
+            fillColor: "#dbeafe",
             padding: [12, 12, 12, 12],
             stack: [
-              { text: 'পেমেন্ট তথ্য', fontSize: 11, bold: true, color: '#0660d6', margin: [0, 0, 0, 8] },
+              {
+                text: "পেমেন্ট তথ্য",
+                fontSize: 11,
+                bold: true,
+                color: "#0660d6",
+                margin: [0, 0, 0, 8],
+              },
               `পেমেন্ট পদ্ধতি: 💵 ক্যাশ অন ডেলিভারি (COD)`,
               `ডেলিভারি সময়: ২-৩ ব্যবসায়িক দিন`,
               `\n✓ অগ্রিম পেমেন্টের প্রয়োজন নেই`,
@@ -194,23 +206,25 @@ export default function Products({ onOrderClick }) {
           },
           {
             text: [
-              'ধন্যবাদ আপনার অর্ডারের জন্য!\n',
-              'আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।\n',
-              'ফোন: 01616123500',
+              "ধন্যবাদ আপনার অর্ডারের জন্য!\n",
+              "আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।\n",
+              "ফোন: 01616123500",
             ],
-            alignment: 'center',
+            alignment: "center",
             fontSize: 10,
             margin: [0, 20, 0, 0],
           },
         ],
       };
 
-      pdfMake.default.createPdf(docDefinition).download(`আলেশা_বাজার_ইনভয়েস_${orderId}.pdf`);
+      pdfMake.default
+        .createPdf(docDefinition)
+        .download(`আলেশা_বাজার_ইনভয়েস_${orderId}.pdf`);
 
       return orderId;
     } catch (error) {
-      console.error('PDF generation error:', error);
-      alert('পিডিএফ তৈরিতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।');
+      console.error("PDF generation error:", error);
+      alert("পিডিএফ তৈরিতে সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
       return null;
     }
   };
@@ -219,19 +233,15 @@ export default function Products({ onOrderClick }) {
     e.preventDefault();
 
     if (selectedProductsList.length === 0) {
-      alert('দয়া করে কমপক্ষে একটি পণ্য নির্বাচন করুন');
+      alert("দয়া করে কমপক্ষে একটি পণ্য নির্বাচন করুন");
       return;
     }
 
-    if (!formData.name || !formData.phone || !formData.address) {
-      alert('দয়া করে সমস্ত ফিল্ড পূরণ করুন');
-      return;
-    }
-
+    // ১. generateInvoiceFile ফাংশন কল করে পিডিএফ তৈরি এবং orderId পাওয়া যাবে
     const orderId = await generateInvoiceFile();
-
     if (!orderId) return;
 
+    // ২. ডাটাবেজে পাঠানোর জন্য অবজেক্ট তৈরি
     const orderData = {
       id: orderId,
       customer: formData,
@@ -245,19 +255,29 @@ export default function Products({ onOrderClick }) {
       shipping: SHIPPING,
       total,
       orderDate: new Date().toISOString(),
-      paymentMethod: 'Cash on Delivery',
-      status: 'pending',
+      paymentMethod: "Cash on Delivery",
+      status: "pending",
     };
 
+    // ৩. API কল করে ডাটাবেজে পাঠানো
     try {
-      const existingOrders = JSON.parse(localStorage.getItem('admin_orders') || '[]');
-      existingOrders.push(orderData);
-      localStorage.setItem('admin_orders', JSON.stringify(existingOrders));
-    } catch (error) {
-      console.error('Error saving order:', error);
-    }
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
 
-    setOrderPlaced(true);
+      const result = await response.json();
+
+      if (result.success) {
+        setOrderPlaced(true);
+      } else {
+        alert("অর্ডারটি ডাটাবেজে সেভ হয়নি। দয়া করে আবার চেষ্টা করুন।");
+      }
+    } catch (error) {
+      console.error("Order Submission Error:", error);
+      alert("সার্ভার এরর! দয়া করে যোগাযোগ করুন।");
+    }
   };
 
   if (orderPlaced) {
@@ -265,21 +285,29 @@ export default function Products({ onOrderClick }) {
       <div className="flex items-center justify-center p-4 min-h-[400px]">
         <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md text-center">
           <div className="text-5xl mb-4">✅</div>
-          <h2 className="text-3xl font-bold text-green-700 mb-4">অর্ডার সফল!</h2>
-          <p className="text-gray-600 mb-6">আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।</p>
+          <h2 className="text-3xl font-bold text-green-700 mb-4">
+            অর্ডার সফল!
+          </h2>
+          <p className="text-gray-600 mb-6">
+            আপনার অর্ডার সফলভাবে গ্রহণ করা হয়েছে। আমরা শীঘ্রই আপনার সাথে
+            যোগাযোগ করব।
+          </p>
           <div className="bg-green-50 p-4 rounded-lg mb-6">
             <p className="text-gray-700">
               <strong>গ্রাহক নাম:</strong> {formData.name}
             </p>
             <p className="text-gray-700">
-              <strong>মোট টাকা:</strong> <span className="text-2xl font-bold text-green-700">৳{total}</span>
+              <strong>মোট টাকা:</strong>{" "}
+              <span className="text-2xl font-bold text-green-700">
+                ৳{total}
+              </span>
             </p>
           </div>
           <button
             onClick={() => {
               setOrderPlaced(false);
               setSelectedProducts({});
-              setFormData({ name: '', phone: '', address: '' });
+              setFormData({ name: "", phone: "", address: "" });
             }}
             className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg w-full transition-colors"
           >
@@ -293,14 +321,20 @@ export default function Products({ onOrderClick }) {
   return (
     <section className="py-16 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">আমাদের সকল পণ্য</h2>
-        <p className="text-center text-gray-600 mb-12">সরাসরি এখানে অর্ডার করুন এবং পাবেন বিশেষ ছাড়</p>
+        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">
+          আমাদের সকল পণ্য
+        </h2>
+        <p className="text-center text-gray-600 mb-12">
+          সরাসরি এখানে অর্ডার করুন এবং পাবেন বিশেষ ছাড়
+        </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* বাম পাশ - পণ্য নির্বাচন */}
           <div className="bg-gradient-to-b from-green-50 to-white rounded-xl shadow-lg p-6 border-2 border-green-200">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">পণ্য নির্বাচন করুন</h3>
-            
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              পণ্য নির্বাচন করুন
+            </h3>
+
             <div className="space-y-4 mb-8">
               {products.map((product) => (
                 <div
@@ -318,11 +352,19 @@ export default function Products({ onOrderClick }) {
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
                         <span className="text-2xl">{product.emoji}</span>
-                        <h4 className="text-lg font-bold text-gray-900">{product.name}</h4>
+                        <h4 className="text-lg font-bold text-gray-900">
+                          {product.name}
+                        </h4>
                       </div>
-                      <p className="text-gray-600 text-sm mt-1">{product.description}</p>
-                      <p className="text-gray-600 text-sm">পরিমাণ: {product.quantity}</p>
-                      <p className="text-green-700 font-bold text-lg mt-2">৳{product.price}</p>
+                      <p className="text-gray-600 text-sm mt-1">
+                        {product.description}
+                      </p>
+                      <p className="text-gray-600 text-sm">
+                        পরিমাণ: {product.quantity}
+                      </p>
+                      <p className="text-green-700 font-bold text-lg mt-2">
+                        ৳{product.price}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -332,12 +374,21 @@ export default function Products({ onOrderClick }) {
             {/* অর্ডার সারসংক্ষেপ */}
             {selectedProductsList.length > 0 && (
               <div className="bg-green-50 rounded-lg p-6 border-2 border-green-200">
-                <h4 className="text-xl font-bold text-gray-900 mb-4">নির্বাচিত পণ্য</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-4">
+                  নির্বাচিত পণ্য
+                </h4>
                 <div className="space-y-3 mb-4">
                   {selectedProductsList.map((product) => (
-                    <div key={product.id} className="flex justify-between items-center">
-                      <span className="text-gray-700">{product.emoji} {product.name}</span>
-                      <span className="font-bold text-gray-900">৳{product.price}</span>
+                    <div
+                      key={product.id}
+                      className="flex justify-between items-center"
+                    >
+                      <span className="text-gray-700">
+                        {product.emoji} {product.name}
+                      </span>
+                      <span className="font-bold text-gray-900">
+                        ৳{product.price}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -351,8 +402,12 @@ export default function Products({ onOrderClick }) {
                     <span className="font-semibold">৳{SHIPPING}</span>
                   </div>
                   <div className="border-t-2 border-green-200 pt-3 flex justify-between items-center">
-                    <span className="text-lg font-bold text-gray-900">মোট:</span>
-                    <span className="text-3xl font-bold text-green-700">৳{total}</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      মোট:
+                    </span>
+                    <span className="text-3xl font-bold text-green-700">
+                      ৳{total}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -363,11 +418,15 @@ export default function Products({ onOrderClick }) {
           <div className="space-y-6">
             {/* গ্রাহক তথ্য ফর্ম */}
             <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-green-200">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">আপনার তথ্য</h3>
-              
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                আপনার তথ্য
+              </h3>
+
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-gray-700 font-bold mb-2">আপনার নাম *</label>
+                  <label className="block text-gray-700 font-bold mb-2">
+                    আপনার নাম *
+                  </label>
                   <input
                     type="text"
                     name="name"
@@ -380,7 +439,9 @@ export default function Products({ onOrderClick }) {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-bold mb-2">মোবাইল নাম্বার *</label>
+                  <label className="block text-gray-700 font-bold mb-2">
+                    মোবাইল নাম্বার *
+                  </label>
                   <input
                     type="tel"
                     name="phone"
@@ -393,7 +454,9 @@ export default function Products({ onOrderClick }) {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-bold mb-2">সম্পূর্ণ ঠিকানা *</label>
+                  <label className="block text-gray-700 font-bold mb-2">
+                    সম্পূর্ণ ঠিকানা *
+                  </label>
                   <textarea
                     name="address"
                     value={formData.address}
@@ -417,27 +480,35 @@ export default function Products({ onOrderClick }) {
 
             {/* ক্যাশ অন ডেলিভারি তথ্য */}
             <div className="bg-blue-50 border-2 border-blue-300 rounded-xl p-6">
-              <h4 className="text-xl font-bold text-blue-900 mb-4">💵 ক্যাশ অন ডেলিভারি (COD)</h4>
+              <h4 className="text-xl font-bold text-blue-900 mb-4">
+                💵 ক্যাশ অন ডেলিভারি (COD)
+              </h4>
               <div className="space-y-3 text-blue-900">
                 <div className="flex items-start gap-3">
                   <span className="text-xl">✓</span>
                   <div>
                     <p className="font-semibold">অগ্রিম পেমেন্ট নেই</p>
-                    <p className="text-sm text-blue-800">কোনো অগ্রিম অর্থ প্রদান করতে হবে না</p>
+                    <p className="text-sm text-blue-800">
+                      কোনো অগ্রিম অর্থ প্রদান করতে হবে না
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-xl">✓</span>
                   <div>
                     <p className="font-semibold">ডেলিভারিতে পেমেন্ট করুন</p>
-                    <p className="text-sm text-blue-800">পণ্য গ্রহণের সময় টাকা প্রদান করুন</p>
+                    <p className="text-sm text-blue-800">
+                      পণ্য গ্রহণের সময় টাকা প্রদান করুন
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-xl">✓</span>
                   <div>
                     <p className="font-semibold">দ্রুত ডেলিভারি</p>
-                    <p className="text-sm text-blue-800">২-৩ ব্যবসায়িক দিনে সরবরাহ</p>
+                    <p className="text-sm text-blue-800">
+                      ২-৩ ব্যবসায়িক দিনে সরবরাহ
+                    </p>
                   </div>
                 </div>
               </div>
