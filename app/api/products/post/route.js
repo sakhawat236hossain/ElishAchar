@@ -4,7 +4,7 @@ import { collections, dbConnect } from "../../../../lib/dbConnect";
 export async function POST(req) {
   try {
 
-    const { name, price, image, weight } = await req.json(); 
+    const { name, price, image, weight, description } = await req.json(); 
     
     const collection = await dbConnect(collections.PRODUCTS);
 
@@ -13,6 +13,7 @@ export async function POST(req) {
       price,
       weight, 
       image,
+      description,
       createdAt: new Date(),
     });
 

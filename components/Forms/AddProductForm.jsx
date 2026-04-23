@@ -8,6 +8,7 @@ export default function AddProductForm() {
   const [price, setPrice] = useState('');
   const [weight, setWeight] = useState('');
   const [image, setImage] = useState(null);
+  const [description, setDescription] = useState('');
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -34,7 +35,8 @@ export default function AddProductForm() {
             name, 
             price: Number(price), 
             weight, 
-            image: imageUrl 
+            image: imageUrl,
+            description,
         }),
       });
 
@@ -43,7 +45,7 @@ export default function AddProductForm() {
       toast.success('প্রোডাক্ট সফলভাবে যোগ হয়েছে!');
       
       // ফর্ম রিসেট
-      setName(''); setPrice(''); setWeight(''); setImage(null); setPreview(null);
+      setName(''); setPrice(''); setWeight(''); setImage(null); setPreview(null); setDescription('');
     } catch (error) {
       toast.error('আপলোডে সমস্যা হয়েছে!');
     } finally {
@@ -75,13 +77,22 @@ export default function AddProductForm() {
           />
         </div>
 
-        {/* Weight Input (নতুন ফিল্ড) */}
+        {/* Weight Input */}
         <div>
           <label className="block text-sm font-medium text-slate-400 mb-2">ওজন (গ্রাম/কেজি)</label>
           <input 
             type="text" required placeholder="উদাহরণ: ৫০০ গ্রাম"
             className="w-full bg-slate-950 text-white p-4 rounded-xl border border-slate-700 focus:border-green-500 outline-none transition duration-300"
             value={weight} onChange={(e) => setWeight(e.target.value)}
+          />
+        </div>
+       
+        <div>
+          <label className="block text-sm font-medium text-slate-400 mb-2">বিবরণ</label>
+          <input 
+            type="text" required placeholder="প্রোডাক্টের বিবরণ"
+            className="w-full bg-slate-950 text-white p-4 rounded-xl border border-slate-700 focus:border-green-500 outline-none transition duration-300"
+            value={description} onChange={(e) => setDescription(e.target.value)}
           />
         </div>
 
