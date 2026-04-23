@@ -12,6 +12,7 @@ export async function POST(req) {
     const result = await collection.insertOne({
       ...body,
       createdAt: new Date(),
+      status: "pending",
     });
 
     return NextResponse.json(
