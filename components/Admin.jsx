@@ -117,7 +117,9 @@ export default function Admin() {
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white">ড্যাশবোর্ড</h1>
+          <Link to={"/"} className="text-2xl font-bold text-white" href="/">
+            ড্যাশবোর্ড
+          </Link>
           <p className="text-slate-400">অর্ডার ম্যানেজমেন্ট সিস্টেম</p>
         </div>
         <button
